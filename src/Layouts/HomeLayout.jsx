@@ -1,12 +1,12 @@
 import {AiFillCloseCircle} from 'react-icons/ai';
 import {FiMenu} from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Footer from '../Components/Footer';
 function HomeLayout({ children }) {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // for checking if user is logged in
@@ -52,7 +52,7 @@ function HomeLayout({ children }) {
                 <div className="drawer-side w-0">
                     <label htmlFor="my-drawer" className="drawer-overlay">
                     </label>
-                    <ul className="menu p-4 w-48 sm:w-80 bg-base-200 text-base-content relative">
+                    <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-200 text-base-content relative">
                         <li className="w-fit absolute right-2 z-50">
                             <button onClick={hideDrawer}>
                                 <AiFillCloseCircle size={24} />
@@ -80,27 +80,51 @@ function HomeLayout({ children }) {
                             <Link to="/about">About Us</Link>
                         </li>
 
+                        {/* --- LOGGED OUT: LOGIN / SIGNUP (FIXED) --- */}
                         {!isLoggedIn && (
-                            <li className="absolute bottom-4 w-[90%">
-                                <div className="w-full flex items-center justify-center">
-                                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full'>
-                                        <Link to="/login">Login</Link>
-                                    </button>
-                                    <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full'>
-                                        <Link to="/login">Signup</Link>
-                                    </button>
+                            <li className="absolute bottom-4 w-[90%]">
+                                <div className="w-full flex items-center justify-center gap-2"> 
+                                    
+                                    <Link 
+                                        to="/login"
+                                        onClick={hideDrawer}
+                                        className='btn btn-primary px-4 py-1 font-semibold rounded-md flex-grow text-center'
+                                    >
+                                        Login
+                                    </Link>
+                                    
+                                    <Link
+                                        to="/signup" 
+                                        onClick={hideDrawer}
+                                        className='btn btn-secondary px-4 py-1 font-semibold rounded-md flex-grow text-center'
+                                    >
+                                        Signup
+                                    </Link>
                                 </div>
                             </li>
                         )}
 
+                        {/* --- LOGGED IN: PROFILE / LOGOUT (FIXED) --- */}
                         {isLoggedIn && (
-                            <li className="absolute bottom-4 w-[90%">
-                                <div className="w-full flex items-center justify-center">
-                                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full'>
-                                        <Link to="/user/profile">Profile</Link>
-                                    </button>
-                                    <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full'>
-                                        <Link onClick={handleLogout}>Logout</Link>
+                            <li className="absolute bottom-4 w-[90%]">
+                                <div className="w-full flex items-center justify-center gap-2"> 
+                                    
+                                    <Link 
+                                        to="/user/profile"
+                                        onClick={hideDrawer}
+                                        className='btn btn-primary px-4 py-1 font-semibold rounded-md flex-grow text-center'
+                                    >
+                                        Profile
+                                    </Link>
+                                    
+                                    <button
+                                        onClick={(e) => {
+                                            handleLogout(e);
+                                            hideDrawer();
+                                        }}
+                                        className='btn btn-secondary px-4 py-1 font-semibold rounded-md flex-grow text-center'
+                                    >
+                                        Logout
                                     </button>
                                 </div>
                             </li>
