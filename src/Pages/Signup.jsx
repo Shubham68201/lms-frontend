@@ -4,6 +4,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { isEmail, isValidPassword } from '../Helpers/regexMatcher';
 import HomeLayout from '../Layouts/HomeLayout';
 import { createAccount } from '../Redux/Slices/AuthSlice';
 
@@ -61,12 +62,12 @@ function Signup() {
             return;
         }
         // checking valid email
-        if(!signupData.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+        if(!isEmail(signupData.email)) {
             toast.error("Invalid email id");
             return;
         }
         // checking password validation
-        if(!signupData.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+        if(!isValidPassword(signupData.password)) {
             toast.error("Password should be 6 - 16 character long with atleast a number and special character");
             return;
         }
@@ -154,7 +155,7 @@ function Signup() {
                         />
                     </div>
 
-                    <button type="submit" className='mt-2 bg-yellow-600 hover:bg-yellow-500 active:scale-95 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer'>
+                    <button type="submit" className='mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer'>
                         Create account
                     </button>
 
