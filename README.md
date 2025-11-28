@@ -5,13 +5,13 @@
 ### 1️⃣ Clone the Project
 
 ```bash
-git clone https://github.com/singhsanket143/lms-frontend-hn.git
+git clone https://github.com/Shubham68201/lms-frontend.git
 ```
 
 ### 2️⃣ Move Into the Directory
 
 ```bash
-cd lms-frontend-hn
+cd lms-frontend
 ```
 
 ### 3️⃣ Install Dependencies
