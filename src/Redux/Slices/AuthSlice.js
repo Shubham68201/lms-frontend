@@ -81,6 +81,22 @@ export const getUserData = createAsyncThunk("/user/details", async () => {
     }
 })
 
+export const changePassword = createAsyncThunk("/auth/changePassword", async (userPassword) => {
+    try {
+        const res = axiosInstance.post("user/change-password", userPassword);
+        
+        toast.promise(res, {
+            loading: "Updating password...",
+            success: (data) => data?.data?.message,
+            error: "Failed to update password"
+        });
+
+        return (await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+    }
+});
+
 
 const authSlice = createSlice({
     name: 'auth',

@@ -20,6 +20,7 @@ import CheckoutFailure from './Pages/Payment/CheckoutFailure';
 import CheckoutSuccess from './Pages/Payment/CheckoutSuccess';
 import Signup from './Pages/Signup';
 import EditProfile from './Pages/User/EditProfile';
+import ChangePassword from './Pages/User/ChangePassword';
 import Profile from './Pages/User/Profile';
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
           <Route path='/user/profile' element={<Profile />} />
+          <Route path='/changepassword' element={<ChangePassword />} />
           <Route path='/user/editprofile' element={<EditProfile />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/checkout/success' element={<CheckoutSuccess />} />
